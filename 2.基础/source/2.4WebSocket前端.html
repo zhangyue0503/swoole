@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+<input type="text" id="txt"/><br/>
+<button onclick="send()">发送</button>
+
+<p id="response">
+
+</p>
+
+<script type="text/javascript">
+  var wsServer = 'ws://192.168.56.133:9504';
+  var websocket = new WebSocket(wsServer);
+  websocket.onopen = function (evt) {
+    console.log("Connected to WebSocket server.");
+  };
+
+  websocket.onclose = function (evt) {
+    console.log("Disconnected");
+  };
+
+  websocket.onmessage = function (evt) {
+    console.log('Retrieved data from server: ' + evt.data);
+    document.getElementById("response").innerHTML = document.getElementById("response").innerHTML + 'Retrieved data from server: ' + evt.data + '<br/>';
+  };
+
+  websocket.onerror = function (evt, e) {
+    console.log('Error occured: ' + evt.data);
+  };
+
+
+  function send(){
+      websocket.send(document.getElementById('txt').value);
+  }
+
+</script>
+</body>
+</html>

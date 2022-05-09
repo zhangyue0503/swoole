@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="fbd38b87-abce-4ed0-8ff0-f7eb1b4a957e" name="swoole" url="http://192.168.56.133:9501">
+        <fileTransfer rootFolder="/home/www" accessType="SFTP" host="192.168.56.133" port="22" sshConfigId="93fec8f9-3632-4b4b-bbe7-41f4eb15192b" sshConfig="root@192.168.56.133:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

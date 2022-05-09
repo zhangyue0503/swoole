@@ -1,0 +1,16 @@
+================
+array(3) {
+  ["consumer_num"]=>
+  int(0)
+  ["producer_num"]=>
+  int(0)
+  ["queue_num"]=>
+  int(0)
+}
+int(0)
+bool(true)
+bool(false)
+int(2)
+int(0)
+================
+入 channel 队协程：3，下标：1
