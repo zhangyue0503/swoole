@@ -1,25 +1,26 @@
 <?php
 
 
-//$tickA = \Swoole\Timer::tick(1000, function($timer_id, $param1){
+// $tickA = \Swoole\Timer::tick(500, function($timer_id, $param1){
 //    static $i = 0;
 //    echo $param1 . ": ". microtime(true), PHP_EOL;
 //    $i++;
-//    if($i == 3){
+//    if($i == 2){
 //        \Swoole\Timer::clear($timer_id);
 //    }
-//}, 'A');
+// }, 'A');
 //A: 1641218219.607
 //A: 1641218220.6068
 //A: 1641218221.6071
 
-//$tickB = \Swoole\Timer::tick(1000, function($timer_id, $param1){
+// $tickB = \Swoole\Timer::tick(1000, function($timer_id, $param1){
 //    echo $param1 . ": ". microtime(true), PHP_EOL;
-//}, 'B');
-//
-//\Swoole\Timer::after(5000, function() use($tickB){
-//    \Swoole\Timer::clear($tickB);
-//});
+// }, 'B');
+
+// \Swoole\Timer::after(5000, function() use($tickB){
+   
+//     \Swoole\Timer::clear($tickB);
+// });
 //B: 1641218178.0143
 //B: 1641218179.0137
 //B: 1641218180.0136
@@ -27,19 +28,19 @@
 //B: 1641218182.0136
 
 
-\Swoole\Timer::tick(1000, function($timer_id, $param1){
-    echo $param1 . ": ". microtime(true), PHP_EOL;
-}, 'C');
-\Swoole\Timer::tick(1000, function($timer_id, $param1){
-    echo $param1 . ": ". microtime(true), PHP_EOL;
-}, 'D');
-\Swoole\Timer::after(5000, function(){
-    echo "After: ". microtime(true), PHP_EOL;
-});
+// \Swoole\Timer::tick(1000, function($timer_id, $param1){
+//     echo $param1 . ": ". microtime(true), PHP_EOL;
+// }, 'C');
+// \Swoole\Timer::tick(1000, function($timer_id, $param1){
+//     echo $param1 . ": ". microtime(true), PHP_EOL;
+// }, 'D');
+// \Swoole\Timer::after(5000, function(){
+//     echo "After: ". microtime(true), PHP_EOL;
+// });
 
-\Swoole\Timer::after(3000, function(){
-    \Swoole\Timer::clearAll();
-});
+// \Swoole\Timer::after(500, function(){
+//     \Swoole\Timer::clearAll();
+// });
 //C: 1641222879.0361
 //D: 1641222879.0362
 //D: 1641222880.0356
@@ -47,14 +48,14 @@
 //C: 1641222881.034
 //D: 1641222881.0341
 
-//$tickE = \Swoole\Timer::tick(10000, function($timer_id, $param1){
-//    echo $param1 . ": ". microtime(true), PHP_EOL;
-//}, 'E');
-//\Swoole\Timer::tick(10000, function($timer_id, $param1){
-//    echo $param1 . ": ". microtime(true), PHP_EOL;
-//}, 'F');
-//
-//var_dump(\Swoole\Timer::info($tickE));
+$tickE = \Swoole\Timer::tick(1000, function($timer_id, $param1){
+   echo $param1 . ": ". microtime(true), PHP_EOL;
+}, 'E');
+\Swoole\Timer::tick(1000, function($timer_id, $param1){
+   echo $param1 . ": ". microtime(true), PHP_EOL;
+}, 'F');
+
+var_dump(\Swoole\Timer::info($tickE));
 //array(5) {
 //  ["exec_msec"]=>
 //  int(10000)
@@ -68,10 +69,16 @@
 //  bool(false)
 //}
 
-//foreach (Swoole\Timer::list() as $timer_id) {
-//    var_dump(Swoole\Timer::info($timer_id));
-//    var_dump(Swoole\Timer::stats($timer_id));
-//}
+// co::sleep(3);
+
+\Swoole\Timer::after(3000, function(){
+    foreach (Swoole\Timer::list() as $timer_id) {
+        var_dump(Swoole\Timer::info($timer_id));
+        var_dump(Swoole\Timer::stats($timer_id));
+     }
+ });
+
+
 
 //array(5) {
 //  ["exec_msec"]=>

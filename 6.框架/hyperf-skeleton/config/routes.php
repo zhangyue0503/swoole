@@ -22,7 +22,7 @@ Router::get('/test1', function () {
 });
 
 Router::addServer('ws', function () {
-    Router::get('/', 'App\Controller\WebSocketController');
+    Router::get('/ws', 'App\Controller\WebSocketController');
 });
 
 Router::get('/db/add', function(){

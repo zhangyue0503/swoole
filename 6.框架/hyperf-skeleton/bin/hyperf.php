@@ -20,5 +20,6 @@ require BASE_PATH . '/vendor/autoload.php';
     $container = require BASE_PATH . '/config/container.php';
 
     $application = $container->get(Hyperf\Contract\ApplicationInterface::class);
+
     $application->run();
 })();

@@ -3,23 +3,23 @@
 
 $workNum = 5;
 
-//$pool = new \Swoole\Process\Pool($workNum);
-//
-//$pool->on('WorkerStart', function(\Swoole\Process\Pool $pool, $workerId){
+// $pool = new \Swoole\Process\Pool($workNum);
+
+// $pool->on('WorkerStart', function(\Swoole\Process\Pool $pool, $workerId){
 //    echo "工作进程：{$workerId}, pid: " . posix_getpid() . " 开始运行！", PHP_EOL;
 //    while(1);
-//});
-//
-//$pool->on("WorkerStop", function(\Swoole\Process\Pool $pool, $workerId){
+// });
+
+// $pool->on("WorkerStop", function(\Swoole\Process\Pool $pool, $workerId){
 //    echo "工作进程：{$workerId}, pid: " . posix_getpid() . " 结束运行！", PHP_EOL;
-//});
-//
-//$pool->start();
+// });
+
+// $pool->start();
 
 
-//$pool = new \Swoole\Process\Pool($workNum, SWOOLE_IPC_UNIXSOCK);
-//
-//$pool->on('WorkerStart', function(\Swoole\Process\Pool $pool, $workerId){
+// $pool = new \Swoole\Process\Pool($workNum, SWOOLE_IPC_UNIXSOCK);
+
+// $pool->on('WorkerStart', function(\Swoole\Process\Pool $pool, $workerId){
 //    $proc1 = $pool->getProcess(0);
 //    while(1){
 //        sleep(1);
@@ -29,17 +29,17 @@ $workNum = 5;
 //            $proc1->write("hello proc1, this is proc" . ($workerId + 1));
 //        }
 //    }
-//});
-//
-//$pool->on("Message", function(Swoole\Process\Pool $pool, $data){
-//});
-//
-//$pool->start();
+// });
+
+// $pool->on("Message", function(Swoole\Process\Pool $pool, $data){
+// });
+
+// $pool->start();
 
 
-//$pool = new \Swoole\Process\Pool($workNum, SWOOLE_IPC_MSGQUEUE, 1);
-//
-//$pool->on('WorkerStart', function(\Swoole\Process\Pool $pool, $workerId){
+// $pool = new \Swoole\Process\Pool($workNum, SWOOLE_IPC_MSGQUEUE, 1);
+
+// $pool->on('WorkerStart', function(\Swoole\Process\Pool $pool, $workerId){
 //    $process = $pool->getProcess();
 //    $process->useQueue(1, 2 | \Swoole\Process::IPC_NOWAIT);
 //    while(1){
@@ -55,26 +55,26 @@ $workNum = 5;
 //            }
 //        }
 //    }
-//});
-//
-//$pool->on("Message", function(Swoole\Process\Pool $pool, $data){
+// });
+
+// $pool->on("Message", function(Swoole\Process\Pool $pool, $data){
 //    var_dump($pool);
 //    var_dump($data);
-//});
-//
-//$pool->start();
+// });
+
+// $pool->start();
 
 
-//$pool = new \Swoole\Process\Pool($workNum, SWOOLE_IPC_MSGQUEUE, 1);
-//
-//$pool->on("Message", function(Swoole\Process\Pool $pool, $data){
+// $pool = new \Swoole\Process\Pool($workNum, SWOOLE_IPC_MSGQUEUE, 1);
+
+// $pool->on("Message", function(Swoole\Process\Pool $pool, $data){
 //    var_dump($pool);
 //    $process = $pool->getProcess();
 //    echo $process->pid, PHP_EOL;
 //    var_dump($data);
-//});
-//
-//$pool->start();
+// });
+
+// $pool->start();
 
 //object(Swoole\Process\Pool)#1 (2) {
 //["master_pid"]=>
@@ -102,35 +102,35 @@ $workNum = 5;
 //string(27) "消息来了1640313653.9647"
 // ………………
 
-//$pool = new \Swoole\Process\Pool($workNum, SWOOLE_IPC_SOCKET);
-//
-//$pool->listen('0.0.0.0', 8089);
-//
-//$pool->on("Message", function(Swoole\Process\Pool $pool, $data){
+// $pool = new \Swoole\Process\Pool($workNum, SWOOLE_IPC_SOCKET);
+
+// $pool->listen('0.0.0.0', 8089);
+
+// $pool->on("Message", function(Swoole\Process\Pool $pool, $data){
 //    var_dump($data);
 //    $pool->write("你发来的数据是：\"{$data}\"");
-//});
-//
-//$pool->start();
+// });
+
+// $pool->start();
 
 // [root@localhost source]# php 3.5进程池与进程管理器.php
 // string(33) "客户端发消息1640318342.8369"
 // string(33) "客户端发消息1640318344.8386"
 // string(33) "客户端发消息1640318346.8397"
 
-//$pool = new \Swoole\Process\Pool($workNum, SWOOLE_IPC_UNIXSOCK);
-//
-//$pool->on('WorkerStart', function(\Swoole\Process\Pool $pool, $workerId){
+$pool = new \Swoole\Process\Pool($workNum, SWOOLE_IPC_UNIXSOCK);
+
+$pool->on('WorkerStart', function(\Swoole\Process\Pool $pool, $workerId){
 //    if($workerId == 0){
-//        echo "Shutdown Worker:{$workerId}, pid:" . posix_getpid(), PHP_EOL;
-//        $pool->shutdown();
+       echo "Shutdown Worker:{$workerId}, pid:" . posix_getpid(), PHP_EOL;
+       var_dump($pool->shutdown());
 //    }
-//});
-//
-//$pool->on('Message', function(\Swoole\Process\Pool $pool, $workerId){
-//});
-//
-//$pool->start();
+});
+
+$pool->on('Message', function(\Swoole\Process\Pool $pool, $workerId){
+});
+
+$pool->start();
 
 // [root@localhost source]# php 3.5进程池与进程管理器.php
 // Shutdown Worker:0, pid:7247
@@ -142,10 +142,10 @@ $workNum = 5;
 //    root      7250  7246  0 23:13 pts/1    00:00:00 php 3.5?程池与?程管理器.php
 //    root      7251  7246  0 23:13 pts/1    00:00:00 php 3.5?程池与?程管理器.php
 
-//$pool = new \Swoole\Process\Pool(2);
-//
-//$pool->on('WorkerStart', function (\Swoole\Process\Pool $pool, $workerId) {
-//
+// $pool = new \Swoole\Process\Pool(2);
+
+// $pool->on('WorkerStart', function (\Swoole\Process\Pool $pool, $workerId) {
+
 //    $i = 0;
 //    while (1) {
 //        sleep(1);
@@ -157,15 +157,15 @@ $workNum = 5;
 //            break;
 //        }
 //    }
-//
-//});
-//
-//$pool->on("WorkerStop", function (\Swoole\Process\Pool $pool, $workerId) {
+
+// });
+
+// $pool->on("WorkerStop", function (\Swoole\Process\Pool $pool, $workerId) {
 //    echo "工作进程：{$workerId}, pid: " . posix_getpid() . " 结束运行！", PHP_EOL;
-//});
-//
-//
-//$pool->start();
+// });
+
+
+// $pool->start();
 
 // [root@localhost source]# php 3.5进程池与进程管理器.php
 // Detach Worker:1, pid:16336
@@ -178,13 +178,13 @@ $workNum = 5;
 // Detach Worker:0, pid:16338
 
 
-$pm = new \Swoole\Process\Manager();
+// $pm = new \Swoole\Process\Manager();
 
-for ($i = 0; $i < 2; $i++) {
-    $pm->add(function (\Swoole\Process\Pool $pool, $workerId) {
-        echo "工作进程：{$workerId}, pid: " . posix_getpid() . " 开始运行！", PHP_EOL;
-        while (1) ;
-    });
-}
+// for ($i = 0; $i < 2; $i++) {
+//     $pm->add(function (\Swoole\Process\Pool $pool, $workerId) {
+//         echo "工作进程：{$workerId}, pid: " . posix_getpid() . " 开始运行！", PHP_EOL;
+//         while (1) ;
+//     });
+// }
 
-$pm->start();
+// $pm->start();

@@ -1,23 +1,23 @@
 <?php
 
 
-//\Swoole\Coroutine\run(function(){
+// \Swoole\Coroutine\run(function(){
 //    go(function(){
 //        co::sleep(2);
 //        echo "cid:" . Co::getCid() , PHP_EOL;
 //    });
-//
+
 //    go(function(){
 //        \Swoole\Coroutine\System::sleep(2);
 //        echo "cid:" . Co::getCid() , PHP_EOL;
 //    });
-//
+
 //    go(function(){
 //        echo "cid:" . Co::getCid() , PHP_EOL;
 //        $ret = \Swoole\Coroutine\System::exec("ls -l ./");
 //        var_dump($ret);
 //    });
-//});
+// });
 
 //cid:4
 //array(3) {
@@ -36,17 +36,17 @@
 //cid:3
 
 
-//$process = new \Swoole\Process(function(){
+// $process = new \Swoole\Process(function(){
 //    echo "Process";
-//});
-//$process->start();
-//echo "进程 pid: ". $process->pid, PHP_EOL;
-//
-//\Swoole\Coroutine\run(function(){
+// });
+// $process->start();
+// echo "进程 pid: ". $process->pid, PHP_EOL;
+
+// \Swoole\Coroutine\run(function(){
 //    $status = \Swoole\Coroutine\System::wait();
 //    echo "wait 进程 pid: ".$status['pid'], PHP_EOL;
 //    var_dump($status);
-//});
+// });
 //进程 pid: 1489
 //Processwait 进程 pid: 1489
 //array(3) {
@@ -58,27 +58,37 @@
 //  int(0)
 //}
 
-//$process1 = new \Swoole\Process(function(){
-//});
-//$process1->start();
-//echo "进程1 pid: ". $process1->pid, PHP_EOL;
-//
-//$process2 = new \Swoole\Process(function(){
+// $process1 = new \Swoole\Process(function(){
+// });
+// $process1->start();
+// echo "进程1 pid: ". $process1->pid, PHP_EOL;
+
+// $process2 = new \Swoole\Process(function(){
 //    sleep(5);
-//});
-//$process2->start();
-//echo "进程2 pid: ". $process2->pid, PHP_EOL;
-//
-//\Swoole\Coroutine\run(function() use ($process1){
+// });
+// $process2->start();
+// echo "进程2 pid: ". $process2->pid, PHP_EOL;
+
+// $process3 = new \Swoole\Process(function(){
+//     sleep(2);
+//  });
+//  $process3->start();
+//  echo "进程3 pid: ". $process3->pid, PHP_EOL;
+
+// \Swoole\Coroutine\run(function() use ($process1){
 //    $status = \Swoole\Coroutine\System::waitPid($process1->pid);
 //    echo "waitPid 进程 pid: ".$status['pid'], PHP_EOL;
 //    var_dump($status);
-//
+
 //    $status = \Swoole\Coroutine\System::wait();
 //    echo "wait 进程 pid: ".$status['pid'], PHP_EOL;
 //    var_dump($status);
-//
-//});
+
+//    $status = \Swoole\Coroutine\System::wait();
+//    echo "wait 进程 pid: ".$status['pid'], PHP_EOL;
+//    var_dump($status);
+
+// });
 //进程1 pid: 1491
 //进程2 pid: 1492
 //waitPid 进程 pid: 1491
@@ -100,15 +110,15 @@
 //  int(0)
 //}
 
-//$process = new \Swoole\Process(function () {
+// $process = new \Swoole\Process(function () {
 //    \Swoole\Coroutine\run(function () {
 //        $bool = \Swoole\Coroutine\System::waitSignal(SIGUSR1);
 //        var_dump($bool);
 //    });
-//});
-//$process->start();
-//sleep(1);
-//$process::kill($process->pid, SIGUSR1);
+// });
+// $process->start();
+// sleep(5);
+// $process::kill($process->pid, SIGUSR1);
 
 //[root@localhost source]# php 4.3协程操作系统API.md.php
 //[root@localhost source]# bool(true)
@@ -133,35 +143,35 @@
 //  string(13) "112.80.248.76"
 //}
 
-//$file = __DIR__ . "/test.data";
-//$fp = fopen($file, "a+");
-//Swoole\Coroutine\run(function () use ($fp, $file)
-//{
+// $file = __DIR__ . "/test.data";
+// $fp = fopen($file, "a+");
+// Swoole\Coroutine\run(function () use ($fp, $file)
+// {
 //    $r = Swoole\Coroutine\System::fwrite($fp, "hello world\n" . PHP_EOL, 5);
 //    var_dump($r);
-//
-//    var_dump(\Swoole\Coroutine\System::readFile($file));
-//});
-//int(5)
-//string(5) "hello"
 
-//Swoole\Coroutine\run(function () use ($fp, $file)
-//{
+//    var_dump(\Swoole\Coroutine\System::readFile($file));
+// });
+// // int(5)
+// // string(5) "hello"
+
+// Swoole\Coroutine\run(function () use ($fp, $file)
+// {
 //    \Swoole\Coroutine\System::writeFile($file, "happy new year\n", FILE_APPEND);
-//
+
 //    $r = Swoole\Coroutine\System::fread($fp);
 //    var_dump($r);
-//
-//
+
+
 //    while($r = Swoole\Coroutine\System::fgets($fp)){
 //        var_dump($r);
 //    }
-//
-//});
-//string(15) "happy new year
-//"
-//string(20) "hellohappy new year
-//"
+
+// });
+// //string(15) "happy new year
+// //"
+// //string(20) "hellohappy new year
+// //"
 
 Swoole\Coroutine\run(function () {
     var_dump(Swoole\Coroutine\System::statvfs('/'));

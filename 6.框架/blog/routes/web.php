@@ -14,13 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-    echo Swoole\Coroutine::getCid(), "<br/>";
-    print_r(Swoole\Coroutine::stats());
-    Swoole\Coroutine::sleep(10);
-    echo "<br/>";
-    echo getmypid(), "<br/>";
-//    return view('welcome');
+    
+    // print_r(request()->all());
+
+    // echo Swoole\Coroutine::getCid(), "<br/>";
+    // print_r(Swoole\Coroutine::stats());
+    // Swoole\Coroutine::sleep(10);
+    // echo "<br/>";
+    // echo getmypid(), "<br/>";
+   return view('welcome');
 });
 
 Route::get('/a', function () {

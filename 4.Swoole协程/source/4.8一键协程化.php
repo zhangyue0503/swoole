@@ -1,5 +1,7 @@
 <?php
 \Swoole\Runtime::enableCoroutine();
+\Swoole\Coroutine\run(function(){
+
 go(function(){
     $i = 9999999999999;
     while($i--){
@@ -10,5 +12,7 @@ go(function(){
 
 go(function(){
     echo 222;
+});
+
 });
 

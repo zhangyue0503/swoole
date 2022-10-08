@@ -12,14 +12,15 @@
     ));
 
     for($i = 1;$i<=10;$i++){
-        $client->send("hello world {$i}，");
+        $client->send("hello world {$i}，\r\n");
     }
-    co::sleep(1);
+    // co::sleep(1);
+    // $client->send("\r\n");$client->send("\r\n");
     for($i = 11;$i<=20;$i++){
-        $client->send("hello world {$i}，");
+        $client->send("hello world {$i}，\r\n");
     }
-    $client->send("\r\n");
-    co::sleep(1);
+    // $client->send("\r\n");
+    // co::sleep(1);
     for($i = 21;$i<=30;$i++){
         $client->send("hello world {$i}，");
         $client->send("\r\n");

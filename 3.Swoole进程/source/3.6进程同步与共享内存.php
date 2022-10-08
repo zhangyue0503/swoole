@@ -1,28 +1,28 @@
 <?php
 
-//$atomic = new Swoole\Atomic();
-//
-//(new \Swoole\Process(function (\Swoole\Process $worker) use ($atomic) {
+// $atomic = new Swoole\Atomic();
+
+// (new \Swoole\Process(function (\Swoole\Process $worker) use ($atomic) {
 //    while($atomic->get() < 5){
 //        $atomic->add();
 //        echo "Atomic Now: {$atomic->get()}, pid: {$worker->pid}", PHP_EOL;
 //        sleep(1);
 //    }
 //    echo "Shutdown {$worker->pid}", PHP_EOL;
-//
-//}))->start();
-//
-//(new \Swoole\Process(function (\Swoole\Process $worker) use ($atomic) {
+
+// }))->start();
+
+// (new \Swoole\Process(function (\Swoole\Process $worker) use ($atomic) {
 //    while($atomic->get() < 10){
 //        $atomic->add();
 //        echo "Atomic Now: {$atomic->get()}, pid: {$worker->pid}", PHP_EOL;
 //        sleep(1);
 //    }
 //    echo "Shutdown {$worker->pid}", PHP_EOL;
-//}))->start();
-//
-//\Swoole\Process::wait();
-//\Swoole\Process::wait();
+// }))->start();
+
+// \Swoole\Process::wait();
+// \Swoole\Process::wait();
 
 // [root@localhost source]# php 3.6进程同步与共享内存.php
 // Atomic Now: 1, pid: 1469
@@ -65,28 +65,28 @@
 //  Shutdown wait Process: 1510
 
 
-//$lock = new Swoole\Lock();
-//
-//(new \Swoole\Process(function (\Swoole\Process $worker) use ($lock) {
+// $lock = new Swoole\Lock();
+
+// (new \Swoole\Process(function (\Swoole\Process $worker) use ($lock) {
 //    echo "Process: {$worker->pid} Wait", PHP_EOL;
 //    $lock->lock();
 //    echo "Process: {$worker->pid} Locked", microtime(true), PHP_EOL;
 //    sleep(3);
 //    $lock->unlock();
 //    echo "Process: {$worker->pid} exit;", PHP_EOL;
-//}))->start();
-//
-//(new \Swoole\Process(function (\Swoole\Process $worker) use ($lock) {
+// }))->start();
+
+// (new \Swoole\Process(function (\Swoole\Process $worker) use ($lock) {
 //    sleep(1);
 //    echo "Process: {$worker->pid} Wait ", PHP_EOL;
 //    $lock->lock();
 //    echo "Process: {$worker->pid} Locked",microtime(true), PHP_EOL;
 //    $lock->unlock();
 //    echo "Process: {$worker->pid} exit;", PHP_EOL;
-//}))->start();
-//
-//\Swoole\Process::wait();
-//\Swoole\Process::wait();
+// }))->start();
+
+// \Swoole\Process::wait();
+// \Swoole\Process::wait();
 //
 //[root@localhost source]# php 3.6进程同步与共享内存.php
 //Process: 1611 Wait
@@ -111,6 +111,7 @@ $table->set($ppid, ['worker_id'=>getmypid(), 'count'=>0, 'data'=>"这里是 " . 
     $table->set($worker->pid, ['worker_id'=>$worker->pid, 'count'=>0, 'data'=>"这里是 {$worker->pid}"]);
     sleep(1);
     $table->incr($worker->pid, 'count');
+    echo $worker->pid, ":";
     print_r($table->get($worker->pid));
 }))->start();
 
@@ -118,6 +119,7 @@ $table->set($ppid, ['worker_id'=>getmypid(), 'count'=>0, 'data'=>"这里是 " . 
     $table->set($worker->pid, ['worker_id'=>$worker->pid, 'count'=>3, 'data'=>"这里是 {$worker->pid}"]);
     sleep(1);
     $table->decr($worker->pid, 'count');
+    echo $worker->pid, ":";
     print_r($table->get($worker->pid));
     sleep(1);
 

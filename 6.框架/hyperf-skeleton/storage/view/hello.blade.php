@@ -5,6 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-hello {{$name}} !
+222 {{$name}} !
 </body>
 </html>

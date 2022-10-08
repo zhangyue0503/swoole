@@ -3,7 +3,8 @@
 $http = new Swoole\Http\Server('0.0.0.0', 9501);
 
 $http->set([
-   'task_worker_num'=>4,
+   'worker_num' => 1,
+   'task_worker_num'=>1,
 ]);
 
 $http->on('Request', function ($request, $response) use($http) {
@@ -14,9 +15,9 @@ $http->on('Request', function ($request, $response) use($http) {
    $http->task("发送广播");
    $http->task("执行队列");
 
-   $http->task("发送邮件2");
-   $http->task("发送广播2");
-   $http->task("执行队列2");
+   // $http->task("发送邮件2");
+   // $http->task("发送广播2");
+   // $http->task("执行队列2");
 
    $response->end('<h1>Hello Swoole. #' . rand(1000, 9999) . '</h1>');
 
@@ -24,10 +25,10 @@ $http->on('Request', function ($request, $response) use($http) {
 
 //处理异步任务(此回调函数在task进程中执行)
 $http->on('Task', function ($serv, $task_id, $reactor_id, $data) {
-   $sec = rand(1,5);
+   $sec = rand(11,15);
    echo "New AsyncTask[id={$task_id}] sleep sec: {$sec}".PHP_EOL;
    sleep($sec);
-//    sleep(rand(1,5));
+   // sleep(rand(1,5));
    //返回任务执行的结果
    $serv->finish("{$data} -> OK");
 });

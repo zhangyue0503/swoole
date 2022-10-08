@@ -1,41 +1,41 @@
 <?php
-//$serv = new Swoole\Server("0.0.0.0", 9501);
-//
-////监听连接进入事件
-//$serv->on('Connect', function ($serv, $fd) {
-//    Co::sleep(5);//此处sleep模拟connect比较慢的情况
+// $serv = new Swoole\Server("0.0.0.0", 9501);
+
+// //监听连接进入事件
+// $serv->on('Connect', function ($serv, $fd) {
+//    co::sleep(5);//此处sleep模拟connect比较慢的情况
 //    echo "onConnect", PHP_EOL;
-//});
-//
-////监听数据接收事件
-//$serv->on('Receive', function ($serv, $fd, $reactor_id, $data) {
+// });
+
+// //监听数据接收事件
+// $serv->on('Receive', function ($serv, $fd, $reactor_id, $data) {
 //    echo "onReceive", PHP_EOL;
-//});
-//
-////监听连接关闭事件
-//$serv->on('Close', function ($serv, $fd) {
+// });
+
+// //监听连接关闭事件
+// $serv->on('Close', function ($serv, $fd) {
 //    echo "Client: Close.\n";
-//});
-//
-////启动服务器
-//$serv->start();
+// });
+
+// //启动服务器
+// $serv->start();
 
 //[root@localhost source]# php 3.3Swoole协程系统.php
 //onReceive
 //onConnect
 
 
-//Swoole\Coroutine\run (function () {
+// Swoole\Coroutine\run (function () {
 //    $server = new Swoole\Coroutine\Http\Server('0.0.0.0', 9501, false);
 //    $server->handle('/', function ($request, $response) {
 //        $response->end("<h1>Index</h1>");
 //    });
-//
+
 //    $server->handle('/showname', function ($request, $response) {
 //        var_dump($request->header);
 //        $response->end("<h1>Hello ".$request->post['name']."</h1>");
 //    });
-//
+
 //    $server->handle('/test', function ($request, $response) {
 //        $response->end("<h1>Test</h1>");
 //    });
@@ -43,26 +43,26 @@
 //        $response->end("<h1>Stop</h1>");
 //        $server->shutdown();
 //    });
-//
-//
-//
+
+
+
 //    $server->start();
-//});
+// });
 
 
-//Swoole\Coroutine\run (function () {
+// Swoole\Coroutine\run (function () {
 //    $server = new Swoole\Coroutine\Server('0.0.0.0', 9501, false);
 //    $server->handle(function(Swoole\Coroutine\Server\Connection $conn){
 //        $data = $conn->recv();
 //        echo $data, PHP_EOL;
 //        $conn->send("协程 TCP ：" . $data);
 //    });
-//
+
 //    $server->start();
-//});
+// });
 
 // 4.7使用
-//Swoole\Coroutine\run (function () {
+// Swoole\Coroutine\run (function () {
 //    $server = new Swoole\Coroutine\Server('0.0.0.0', 9501, false);
 //    $server->handle(function(Swoole\Coroutine\Server\Connection $conn){
 //        $i = 2;
@@ -73,11 +73,11 @@
 //            sleep(1);
 //            $i--;
 //        }
-//        $conn->close();
+//     //    $conn->close();
 //    });
-//
+
 //    $server->start();
-//});
+// });
 
 // 5.2使用
 Swoole\Coroutine\run (function () {
@@ -96,24 +96,24 @@ Swoole\Coroutine\run (function () {
     $server->start();
 });
 
-//Swoole\Coroutine\run(function () {
+// Swoole\Coroutine\run(function () {
 //    $socket = new Swoole\Coroutine\Socket(AF_INET, SOCK_DGRAM, 0);
 //    $socket->bind('0.0.0.0', 9501);
-//
+
 //    while (true) {
 //        $peer = null;
 //        $data = $socket->recvfrom($peer);
 //        echo "[Server] recvfrom[{$peer['address']}:{$peer['port']}] : $data\n";
 //        $socket->sendto($peer['address'], $peer['port'], "Swoole: $data");
 //    }
-//});
+// });
 
 // 4.7使用
-//Swoole\Coroutine\run(function () {
+// Swoole\Coroutine\run(function () {
 //    $socket = new Swoole\Coroutine\Socket(AF_INET, SOCK_STREAM);
 //    $socket->bind('0.0.0.0', 9501);
 //    $socket->listen();
-//
+
 //    while(1){
 //    $client = $socket->accept();
 //    if ($client !== false) {
@@ -126,10 +126,10 @@ Swoole\Coroutine\run (function () {
 //                    echo "isClosed:";
 //                    var_dump($client->isClosed());
 //                    $client->close();
-//
+
 //                    echo "断开连接", PHP_EOL;
 //                    co::sleep(1);
-//
+
 //                    echo "checkLiveness:";
 //                    var_dump($client->checkLiveness());
 //                    echo "isClosed:";
@@ -143,13 +143,13 @@ Swoole\Coroutine\run (function () {
 //            }
 //        });
 //    }
-//
+
 //    }
-//
-//});
+
+// });
 
 //
-//Swoole\Coroutine\run(function () {
+// Swoole\Coroutine\run(function () {
 //    $server = new Swoole\Coroutine\Http\Server('0.0.0.0', 9501, false);
 //    $server->handle('/websocket', function (Swoole\Http\Request $request, Swoole\Http\Response $ws) {
 //        $ws->upgrade();
@@ -172,33 +172,33 @@ Swoole\Coroutine\run (function () {
 //            }
 //        }
 //    });
-//
+
 //    $server->handle('/', function (Swoole\Http\Request $request, Swoole\Http\Response $response) {
 //        $response->end(<<<HTML
 //    <h1>Swoole WebSocket Server</h1>
 //    <script>
-//var wsServer = 'ws://192.168.56.133:9501/websocket';
-//var websocket = new WebSocket(wsServer);
-//websocket.onopen = function (evt) {
+// var wsServer = 'ws://127.0.0.1:9501/websocket';
+// var websocket = new WebSocket(wsServer);
+// websocket.onopen = function (evt) {
 //    console.log("Connected to WebSocket server.");
 //    websocket.send('hello');
-//};
-//
-//websocket.onclose = function (evt) {
+// };
+
+// websocket.onclose = function (evt) {
 //    console.log("Disconnected");
-//};
-//
-//websocket.onmessage = function (evt) {
+// };
+
+// websocket.onmessage = function (evt) {
 //    console.log('Retrieved data from server: ' + evt.data);
-//};
-//
-//websocket.onerror = function (evt, e) {
+// };
+
+// websocket.onerror = function (evt, e) {
 //    console.log('Error occured: ' + evt.data);
-//};
-//</script>
-//HTML
+// };
+// </script>
+// HTML
 //        );
 //    });
-//
+
 //    $server->start();
-//});
+// });

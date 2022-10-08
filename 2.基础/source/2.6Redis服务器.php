@@ -100,30 +100,30 @@ $server->on('WorkerStart', function ($server) {
     });
 });
 
-//$server->setHandler('KEYS', function ($fd, $data) use ($server) {
-//    if (count($data) == 0) {
-//        return $server->send($fd, Server::format(Server::ERROR, "ERR wrong number of arguments for 'GET' command"));
-//    }
-//
-//    if(!$server->data){
-//        return $server->send($fd, Server::format(Server::NIL));
-//    }
-//
-//    $key = $data[0];
-//    if($key == "*"){
-//        return $server->send($fd, Server::format(Server::SET, array_keys($server->data)));
-//    }else{
-//        $dataKeys = array_keys($server->data);
-//        $key = str_replace(["*", "?"], [".*", ".?"], $key);
-//        $values = array_filter($dataKeys, function($value) use ($key){
-//            return preg_match('/'.$key.'/i', $value, $mchs);
-//        });
-//        if($values){
-//            return $server->send($fd, Server::format(Server::SET, $values));
-//        }
-//    }
-//    return $server->send($fd, Server::format(Server::NIL));
-//});
+$server->setHandler('KEYS', function ($fd, $data) use ($server) {
+   if (count($data) == 0) {
+       return $server->send($fd, Server::format(Server::ERROR, "ERR wrong number of arguments for 'GET' command"));
+   }
+
+   if(!$server->data){
+       return $server->send($fd, Server::format(Server::NIL));
+   }
+
+   $key = $data[0];
+   if($key == "*"){
+       return $server->send($fd, Server::format(Server::SET, array_keys($server->data)));
+   }else{
+       $dataKeys = array_keys($server->data);
+       $key = str_replace(["*", "?"], [".*", ".?"], $key);
+       $values = array_filter($dataKeys, function($value) use ($key){
+           return preg_match('/'.$key.'/i', $value, $mchs);
+       });
+       if($values){
+           return $server->send($fd, Server::format(Server::SET, $values));
+       }
+   }
+   return $server->send($fd, Server::format(Server::NIL));
+});
 
 
 

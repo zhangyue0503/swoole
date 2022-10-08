@@ -20,45 +20,45 @@ return [
             'name' => 'http',
             'type' => Server::SERVER_HTTP,
             'host' => '0.0.0.0',
-            'port' => 9501,
+            'port' => 9601,
             'sock_type' => SWOOLE_SOCK_TCP,
             'callbacks' => [
                 Event::ON_REQUEST => [Hyperf\HttpServer\Server::class, 'onRequest'],
             ],
         ],
-        [
-            'name' => 'tcp',
-            'type' => Server::SERVER_BASE,
-            'host' => '0.0.0.0',
-            'port' => 9502,
-            'sock_type' => SWOOLE_SOCK_TCP,
-            'callbacks' => [
-                Event::ON_RECEIVE => [\App\Controller\TcpServer::class, 'onReceive'],
-                Event::ON_CLOSE => [\App\Controller\TcpServer::class, 'onClose'],
-            ],
-        ],
-        [
-            'name' => 'udp',
-            'type' => Server::SERVER_BASE,
-            'host' => '0.0.0.0',
-            'port' => 9503,
-            'sock_type' => SWOOLE_SOCK_UDP,
-            'callbacks' => [
-                Event::ON_PACKET => [\App\Controller\UdpServer::class, 'onPacket'],
-            ],
-        ],
-        [
-            'name' => 'ws',
-            'type' => Server::SERVER_WEBSOCKET,
-            'host' => '0.0.0.0',
-            'port' => 9504,
-            'sock_type' => SWOOLE_SOCK_TCP,
-            'callbacks' => [
-                Event::ON_HAND_SHAKE => [Hyperf\WebSocketServer\Server::class, 'onHandShake'],
-                Event::ON_MESSAGE => [Hyperf\WebSocketServer\Server::class, 'onMessage'],
-                Event::ON_CLOSE => [Hyperf\WebSocketServer\Server::class, 'onClose'],
-            ],
-        ],
+//        [
+//            'name' => 'tcp',
+//            'type' => Server::SERVER_BASE,
+//            'host' => '0.0.0.0',
+//            'port' => 9502,
+//            'sock_type' => SWOOLE_SOCK_TCP,
+//            'callbacks' => [
+//                Event::ON_RECEIVE => [\App\Controller\TcpServer::class, 'onReceive'],
+//                Event::ON_CLOSE => [\App\Controller\TcpServer::class, 'onClose'],
+//            ],
+//        ],
+//        [
+//            'name' => 'udp',
+//            'type' => Server::SERVER_BASE,
+//            'host' => '0.0.0.0',
+//            'port' => 9503,
+//            'sock_type' => SWOOLE_SOCK_UDP,
+//            'callbacks' => [
+//                Event::ON_PACKET => [\App\Controller\UdpServer::class, 'onPacket'],
+//            ],
+//        ],
+//        [
+//            'name' => 'ws',
+//            'type' => Server::SERVER_WEBSOCKET,
+//            'host' => '0.0.0.0',
+//            'port' => 9504,
+//            'sock_type' => SWOOLE_SOCK_TCP,
+//            'callbacks' => [
+//                Event::ON_HAND_SHAKE => [Hyperf\WebSocketServer\Server::class, 'onHandShake'],
+//                Event::ON_MESSAGE => [Hyperf\WebSocketServer\Server::class, 'onMessage'],
+//                Event::ON_CLOSE => [Hyperf\WebSocketServer\Server::class, 'onClose'],
+//            ],
+//        ],
     ],
     'settings' => [
         Constant::OPTION_ENABLE_COROUTINE => true,
@@ -72,7 +72,7 @@ return [
         Constant::OPTION_BUFFER_OUTPUT_SIZE => 2 * 1024 * 1024,
         // Task Worker 数量，根据您的服务器配置而配置适当的数量
         'task_worker_num' => 8,
-        // 因为 `Task` 主要处理无法协程化的方法，所以这里推荐设为 `false`，避免协程下出现数据混淆的情况
+        // 因为 `Task` 主要处理无法协这程化的方法，所以里推荐设为 `false`，避免协程下出现数据混淆的情况
         'task_enable_coroutine' => false,
     ],
     'callbacks' => [
