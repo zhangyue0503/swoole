@@ -92,22 +92,22 @@
 //  Child 2063：来自 Master 的数据 - "2063，你好！"。
 //  Master：来自子进程 2063 的数据 - "发送给领导，来自 2063 的数据，通过管道 6 ！"
 
-// for ($i = 1; $i < 3; $i++) {
-//     $process = new Swoole\Process(function (Swoole\Process $worker) {
-//         var_dump($worker);
-//         while($msg = $worker->pop()) {
-//             if ($msg === false) {
-//                 break;
-//             }
-//             echo "Child {$worker->pid}：来自 Master 的数据 - \"{$msg}\"。", PHP_EOL;
-//             sleep(1);
-//         }
-//     });
-//     // $process->useQueue(1, 2);
-//    $process->useQueue(1, 2);
-// //    $process->useQueue(1, 1 | \Swoole\Process::IPC_NOWAIT);
-//     $process->start();
-// }
+ for ($i = 1; $i < 3; $i++) {
+     $process = new Swoole\Process(function (Swoole\Process $worker) {
+         var_dump($worker);
+         while($msg = $worker->pop()) {
+             if ($msg === false) {
+                 break;
+             }
+             echo "Child {$worker->pid}：来自 Master 的数据 - \"{$msg}\"。", PHP_EOL;
+             sleep(1);
+         }
+     });
+     // $process->useQueue(1, 2);
+    $process->useQueue(1, 2);
+ //    $process->useQueue(1, 1 | \Swoole\Process::IPC_NOWAIT);
+     $process->start();
+ }
 // $messages = [
 //     "Hello World!",
 //     "Hello Cat!",

@@ -37,25 +37,25 @@ $workNum = 5;
 // $pool->start();
 
 
-// $pool = new \Swoole\Process\Pool($workNum, SWOOLE_IPC_MSGQUEUE, 1);
+ $pool = new \Swoole\Process\Pool($workNum, SWOOLE_IPC_MSGQUEUE, 1);
 
-// $pool->on('WorkerStart', function(\Swoole\Process\Pool $pool, $workerId){
-//    $process = $pool->getProcess();
-//    $process->useQueue(1, 2 | \Swoole\Process::IPC_NOWAIT);
-//    while(1){
-//        sleep(1);
-//        if($workerId == 0){
-//            foreach(range(1,4) as $v){
-//                $process->push("[{$v}]消息来了" . time());
-//            }
-//        }else{
-//            $data = $process->pop();
-//            if($data){
-//                echo $process->pop(), ' workerid:', $workerId, PHP_EOL;
-//            }
-//        }
-//    }
-// });
+ $pool->on('WorkerStart', function(\Swoole\Process\Pool $pool, $workerId){
+    $process = $pool->getProcess();
+    $process->useQueue(1, 2 | \Swoole\Process::IPC_NOWAIT);
+    while(1){
+        sleep(1);
+        if($workerId == 0){
+            foreach(range(1,4) as $v){
+                $process->push("[{$v}]消息来了" . time());
+            }
+        }else{
+            $data = $process->pop();
+            if($data){
+                echo $process->pop(), ' workerid:', $workerId, PHP_EOL;
+            }
+        }
+    }
+ });
 
 // $pool->on("Message", function(Swoole\Process\Pool $pool, $data){
 //    var_dump($pool);
