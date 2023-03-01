@@ -16,20 +16,20 @@
 // echo "服务启动", PHP_EOL;
 // $http->start();
 
-// $http = new Swoole\Http\Server('0.0.0.0', 9501);
+$http = new Swoole\Http\Server('0.0.0.0', 9501);
 
-// $i = 1;
+$i = 1;
 
-// $http->set([
-//    'worker_num'=>2,
-// ]);
+$http->set([
+   'worker_num'=>5,
+]);
 
-// $http->on('Request', function ($request, $response) {
-//    global $i;
-//    $response->end($i++);
-// });
+$http->on('Request', function ($request, $response) {
+   global $i;
+   $response->end($i++);
+});
 
-// $http->start();
+$http->start();
 
 
 // 创建Server对象，监听 9501 端口
@@ -53,13 +53,13 @@
 //  //启动服务器
 //  $server->start();
 
-$server = new Swoole\Server('0.0.0.0', 9501, SWOOLE_PROCESS, SWOOLE_SOCK_UDP);
+// $server = new Swoole\Server('0.0.0.0', 9501, SWOOLE_PROCESS, SWOOLE_SOCK_UDP);
 
-//监听数据接收事件
-$server->on('Packet', function ($server, $data, $clientInfo) {
-   var_dump($clientInfo);
-   $server->sendto($clientInfo['address'], $clientInfo['port'], "Server UDP：{$data}");
-});
+// //监听数据接收事件
+// $server->on('Packet', function ($server, $data, $clientInfo) {
+//    var_dump($clientInfo);
+//    $server->sendto($clientInfo['address'], $clientInfo['port'], "Server UDP：{$data}");
+// });
 
-//启动服务器
-$server->start();
+// //启动服务器
+// $server->start();
