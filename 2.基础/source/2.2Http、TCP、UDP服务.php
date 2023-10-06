@@ -31,7 +31,6 @@ $http->on('Request', function ($request, $response) {
 
 $http->start();
 
-
 // 创建Server对象，监听 9501 端口
 //  $server = new Swoole\Server('0.0.0.0', 9501);
 

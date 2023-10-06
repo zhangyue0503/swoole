@@ -10,14 +10,13 @@
 //    $process->start();
 // }
 
-
 // while(1) sleep(100);
 
 // for ($n = 2; $n--;) {
 //    $status = \Swoole\Process::wait(true);
 //    echo "Recycled #{$status['pid']}, code={$status['code']}, signal={$status['signal']}" . PHP_EOL;
 // }
-echo 'Parent #' . getmypid() . ' exit' . PHP_EOL;
+// echo 'Parent #' . getmypid() . ' exit' . PHP_EOL;
 // while(1) sleep(100);
 // $obj = new stdClass();
 // $obj->parent = 1;
@@ -97,15 +96,12 @@ echo 'Parent #' . getmypid() . ' exit' . PHP_EOL;
 // root      1943  1942  0 21:45 pts/0    00:00:00 Child Test1
 // root      1944  1942  0 21:45 pts/0    00:00:00 Child Test2
 
-
 // Swoole\Process::daemon();
 
 // (new \Swoole\Process(function (\Swoole\Process $process) {
 //     echo $process->exec('/usr/local/bin/php', ['-r', 'echo 1+1;']);
 //     // 2
 // }))->start();
-
-
 
 // (new \Swoole\Process(function(\Swoole\Process $pro){
 //    $pro->exit(9);
@@ -133,15 +129,13 @@ echo 'Parent #' . getmypid() . ' exit' . PHP_EOL;
 ////  )
 ////  PID=2087
 
-Swoole\Process::setAffinity([0]);
+// Swoole\Process::setAffinity([0]);
 
-$process = new \Swoole\Process(function(\Swoole\Process $pro){
+$process = new \Swoole\Process(function (\Swoole\Process $pro) {
     echo $pro->getPriority(PRIO_PROCESS), PHP_EOL;
 });
 $process->start();
 $process->setPriority(PRIO_PROCESS, -10);
-
-
 
 Swoole\Process::signal(SIGCHLD, function ($sig) {
     //必须为false，非阻塞模式
@@ -151,19 +145,12 @@ Swoole\Process::signal(SIGCHLD, function ($sig) {
     }
 });
 
-
-
 // echo 'Parent #' . getmypid() . ' exit' . PHP_EOL;
 // // while(1) sleep(100);
 Swoole\Timer::tick(2000, function () {});
-
-
-
-
 
 // Swoole\Timer::tick(1000, function () {
 //     // echo "hello\n";
 // });
 
 // \Swoole\Event::wait();
-
